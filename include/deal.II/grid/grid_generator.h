@@ -851,6 +851,31 @@ namespace GridGenerator
     const bool          colorize = false);
 
   /**
+  @brief Produce a domain that is the space between two hemisphere-cylinders.
+  @detail
+    Based on hyper_cube_with_cylindrical_hole
+    Boundary ID's follow the vertex numbering, with 
+        0 -> right side of outer spherical boundary
+        ... counter-clockwise
+        4 -> left side of outer spherical boundary
+        5 -> right side of inner spherical boundary
+        ... counter-clockwise
+        9 -> left side of inner spherical boundary
+    Manifold ID's:
+        0 -> Hemi-spherical manifold radially centered at the origin
+        1 -> Cyldrincal manifoldd
+    The origin of the coordinate system is at the radial center of the spherical manifold.
+  @todo Insert image showing coarse grid with overlaid geometry/manifolds, labeled parameters, boundary ID's, and manifold ID's.
+  @todo Implement in 3D
+  **/
+  template<int dim>
+  void hemisphere_cylinder_shell (Triangulation<dim,dim> &tria,
+                              const double inner_radius=0.25,
+                              const double outer_radius=0.5,
+                              const double inner_length=1.0,
+                              const double outer_length=1.25);
+  
+  /**
    * Produce a ring of cells in 3d that is cut open, twisted and glued
    * together again. This results in a kind of moebius-loop.
    *
