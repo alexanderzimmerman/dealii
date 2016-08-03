@@ -4342,8 +4342,7 @@ namespace GridGenerator
                        const double,
                        const double,
                        const double,
-                       const Point<1>,
-                       const std::vector<double>)
+                       const Point<1>)
   {
     Assert (false, ExcNotImplemented()); // There should be no reason to implement this in 1D.
   }
@@ -4353,8 +4352,7 @@ namespace GridGenerator
                               const double outer_radius, // Radius of shell's outside boundary
                               const double inner_length, // Length of the inside cylinder
                               const double outer_length, // Length of the outside cylinder
-                              const Point<2> radial_center,
-                              const std::vector<double> axis_angles)
+                              const Point<3> rigid_transformation_vector)
   {
         /*
         Based on hyper_cube_with_cylindrical_hole
@@ -4510,7 +4508,13 @@ namespace GridGenerator
             }
         }
         // Shift and rotate the grid.
+        Point<dim-1> axis_angles;
+        axis_angles[0] = rigid_transformation_vector[dim];
         GridTools::rotate(axis_angles[0], tria);
+        Point<dim> radial_center;
+        for (int i = 0; i < dim; i++) {
+            radial_center[i] = rigid_transformation_vector[i];
+        }
         GridTools::shift(radial_center, tria);
   }
   template <>
@@ -4519,8 +4523,7 @@ namespace GridGenerator
                        const double,
                        const double,
                        const double,
-                       const Point<3>,
-                       const std::vector<double>)
+                       const Point<5>)
   {
     Assert (false, ExcNotImplemented()); // A 3D implementation is needed.
   }

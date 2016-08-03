@@ -874,8 +874,7 @@ namespace GridGenerator
                               const double outer_radius=0.5,
                               const double inner_length=1.0,
                               const double outer_length=1.25,
-                              const Point<dim> radial_center=std::vector<double>(),
-                              const std::vector<double> axis_angles=std::vector<double>()
+                              const Point<2*dim-1> rigid_transformation_vector=std::vector<double>()
                                  );
   
   /**
