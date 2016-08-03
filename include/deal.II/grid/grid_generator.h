@@ -873,7 +873,10 @@ namespace GridGenerator
                               const double inner_radius=0.25,
                               const double outer_radius=0.5,
                               const double inner_length=1.0,
-                              const double outer_length=1.25);
+                              const double outer_length=1.25,
+                              const Point<dim> radial_center=std::vector<double>(),
+                              const std::vector<double> axis_angles=std::vector<double>()
+                                 );
   
   /**
    * Produce a ring of cells in 3d that is cut open, twisted and glued

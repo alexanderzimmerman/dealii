@@ -4341,16 +4341,20 @@ namespace GridGenerator
                        const double,
                        const double,
                        const double,
-                       const double )
+                       const double,
+                       const Point<1>,
+                       const std::vector<double>)
   {
     Assert (false, ExcNotImplemented()); // There should be no reason to implement this in 1D.
   }
   template<>
-  void hemisphere_cylinder_shell(dealii::Triangulation<2,2> & tria,
+  void hemisphere_cylinder_shell(Triangulation<2,2> & tria,
                               const double inner_radius, // Radius of shell's inside boundary
                               const double outer_radius, // Radius of shell's outside boundary
                               const double inner_length, // Length of the inside cylinder
-                              const double outer_length) // Length of the outside cylinder
+                              const double outer_length, // Length of the outside cylinder
+                              const Point<2> radial_center,
+                              const std::vector<double> axis_angles)
   {
         /*
         Based on hyper_cube_with_cylindrical_hole
@@ -4505,13 +4509,18 @@ namespace GridGenerator
                 cell->set_all_manifold_ids(1); // Cylindrical
             }
         }
+        // Shift and rotate the grid.
+        GridTools::rotate(axis_angles[0], tria);
+        GridTools::shift(radial_center, tria);
   }
   template <>
   void hemisphere_cylinder_shell (Triangulation<3,3> &,
                        const double,
                        const double,
                        const double,
-                       const double )
+                       const double,
+                       const Point<3>,
+                       const std::vector<double>)
   {
     Assert (false, ExcNotImplemented()); // A 3D implementation is needed.
   }
